@@ -2,8 +2,8 @@
     session_start();
     require 'vendor/autoload.php';
 
+    // Must be same as on node
     $key = '530120e67dd417b5a8bbc324f25f04d4';
-
 
     if (empty($_SESSION['token'])) {
         $data = [
