@@ -19,17 +19,17 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = '530120e67dd417b5a8bbc324f25f04d4';
 
 // Middleware for incoming sockets
-const authHandler = function authHandler(socket) {
+const authHandler = function authHandler(socket, next) {
     jwt.verify(socket.handshake.query.token, jwtSecret, function (error, decoded) {
         if (!error) {
             socket.decoded_token = decoded;
-            console.log(socket.decoded_token);
             return true;
         }
 
         socket.disconnect(true);
         return true;
     });
+    next();
 };
 io.use(authHandler);
 
